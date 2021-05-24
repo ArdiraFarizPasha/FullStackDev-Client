@@ -6,6 +6,7 @@ import { history } from '../app/store'
 import Home from 'pages/home/home'
 import PersonalForm from 'pages/personal/personal'
 import TestForm from 'pages/form/form'
+import CompletePage from 'pages/complete/complete'
 
 const routes = () => (
   <ConnectedRouter history={history}>
@@ -23,6 +24,11 @@ const routes = () => (
        <Route
         exact path='/form' render={() => {
           return <TestForm />
+        }}
+      />
+      <Route
+        exact path='/complete' render={() => {
+          return <CompletePage />
         }}
       />
     </Switch>

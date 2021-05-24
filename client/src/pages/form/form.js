@@ -1,5 +1,5 @@
 import axios from 'axios'
-import React from 'react'
+import React, { useEffect } from 'react'
 import { FormattedMessage } from 'react-intl'
 import {
   ButtonContainer,
@@ -9,8 +9,7 @@ import { Form, Field } from 'react-final-form'
 import { useDispatch, useSelector } from 'react-redux'
 import { replace } from 'connected-react-router'
 import './form.css'
-import { setSymptoms, setTestResult } from './slice'
-
+import { setSymptoms, setTestResult, setUserId } from './slice'
 
 function TestForm() {
 
@@ -18,12 +17,35 @@ function TestForm() {
   const { form } = useSelector((state => state))
 
   const handleSubmitTestResult = (values, dispatch) => {
+    // values => testResult : 'yes'
     dispatch(setTestResult(values))
     dispatch(replace('/form'))
   }
 
-  const handleSubmitSymptomsTest = (values, dispatch) => {
-    dispatch(setSymptoms(values))
+  useEffect(() => {
+    console.log(form, "<< form use effect");
+  }, [form])
+
+  const handleSubmitSymptomsTest = async (values, dispatch) => {
+    // values => semua isi symptoms "yes"/"no"
+    let temp = values
+    temp = {
+      ...temp,
+      testResult: form.symptoms.testResult,
+      userId: form.symptoms.userId
+    }
+    await axios({
+      method: 'post',
+      url: 'http://localhost:5000/form',
+      data: temp
+    })
+      .then(({ data }) => {
+        console.log(data, "<< data");
+        dispatch(replace('/complete'))
+      })
+      .catch(err => {
+        alert(err)
+      })
   }
 
   return (

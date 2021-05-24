@@ -27,7 +27,7 @@ function PersonalForm() {
       data: values
     })
     .then(({data}) => {
-      dispatch(setUserId(data.user.id))
+      dispatch(setUserId(data.id))
       dispatch(replace('/form'))
     })
     .catch(err => {
