@@ -10,6 +10,7 @@ import { useDispatch } from 'react-redux'
 import { TextInput, Dropdown } from './components/inputForm'
 import './personalStyle'
 import { replace } from 'connected-react-router'
+import { setUserId } from 'pages/form/slice'
 
 
 
@@ -20,7 +21,18 @@ function PersonalForm() {
 
   const dispatch = useDispatch()
   const handleSubmit = (values, dispatch) => {
-
+    axios({
+      method: 'post',
+      url: 'http://localhost:5000/personal',
+      data: values
+    })
+    .then(({data}) => {
+      dispatch(setUserId(data.user.id))
+      dispatch(replace('/form'))
+    })
+    .catch(err => {
+      alert(err)
+    })
   }
 
   const hospitalDropdown = [
@@ -135,9 +147,6 @@ function PersonalForm() {
                   >
                     <button
                       type="submit"
-                      onClick={() => {
-                        dispatch(replace('/form'))
-                      }}
                     >
                       Submit
                       </button>

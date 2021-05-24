@@ -25,11 +25,13 @@ function Home() {
 
   const [state, setState] = useState([])
 
+  // GET USER
   // axios.get('http://localhost:5000/personal')
   // .then(({data}) => {
-  //   setState(data)
-  //   console.log(state, "<<")
+  //   // setState(data)
+  //   console.log(data, "<<")
   // })
+
   const dispatch = useDispatch()
 
   return (

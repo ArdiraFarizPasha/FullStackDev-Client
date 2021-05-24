@@ -3,8 +3,8 @@ import { createSlice } from '@reduxjs/toolkit'
 export const formSlice = createSlice({
   name: 'form',
   initialState: {
-    testResult: '',
     symptoms: {
+      testResult: '',
       userId: '',
       fever: '',
       breathingDifficulty: '',
@@ -18,7 +18,10 @@ export const formSlice = createSlice({
   },
   reducers: {
     setTestResult: (state, action) => {
-      state.testResult = action.payload.testResult
+      state.symptoms = {
+        ...state.symptoms,
+        testResult: action.payload.testResult
+      }
     },
     setSymptoms: (state, action) => {
       state.symptoms = {

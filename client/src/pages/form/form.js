@@ -16,10 +16,8 @@ function TestForm() {
 
   const dispatch = useDispatch()
   const { form } = useSelector((state => state))
-  console.log(form, "<<< form");
 
   const handleSubmitTestResult = (values, dispatch) => {
-    console.log(values, "<<");
     dispatch(setTestResult(values))
     dispatch(replace('/form'))
   }
@@ -30,7 +28,7 @@ function TestForm() {
 
   return (
     <div>
-      {!form.testResult && !form.symptoms.fever ?
+      {!form.symptoms.testResult && !form.symptoms.fever ?
         <Form
           onSubmit={values => {
             handleSubmitTestResult(values, dispatch)
@@ -80,7 +78,7 @@ function TestForm() {
           )}
         />
         : null}
-      {form.testResult && !form.symptoms.fever ?
+      {form.symptoms.testResult && !form.symptoms.fever ?
         <Form
           onSubmit={values => {
             handleSubmitSymptomsTest(values, dispatch)
@@ -238,11 +236,7 @@ function TestForm() {
                   padding: '1rem'
                 }}
               >
-                <button
-                  // onClick={() => {
-                  //   dispatch(replace('/complete'))
-                  // }}
-                >
+                <button>
                   Submit
                 </button>
               </div>
