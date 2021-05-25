@@ -29,20 +29,53 @@ export default {
 
     // Personal Form
     'personal-form-title' : 'Mohon lengkapi informasi diri Anda.',
+    'male' : 'Pria',
+    'female' : 'Wanita',
+
+    // Button Lanjut / Submit
+    'submit' : 'Lanjut',
+    // Placeholder Input Box Form Page
+    'fullname': 'Nama Lengkap*',
+    'gender': 'Jenis kelamin*',
+    'date-of-birth': 'Tanggal lahir (dd/mm/yyyy)*',
+    'email': 'Email',
+    'handphone-number': 'Nomor handphone*',
+    'visited-hospital': 'Rumah sakit Siloam yang dikunjungi',
     
+    // Final - Complete Report Header
+    'thank-you' : 'Terima Kasih Telah Mengisi Form',
+    'show-questionnaire' : 'Mohon tunjukkan hasil kuesioner ini kepada staf di pintu masuk',
+    'test-result' : 'Terima Kasih atas kerjasamanya dalam mengisi form deklarasi kesehatan dalam rangka menjaga penyebaran dan mengurangi resiko terpapar COVID-19. Berdasarkan jawaban Anda, hasil Anda',
+
+    // Final - Complete Report - Upper
+    'fullname-final' : 'Nama Lengkap',
+    'gender-final' : 'Jenis Kelamin',
+    'date-of-birth-final' : 'Tanggal Lahir',
+    'visited-hospital' : 'Unit Siloam yang Dikunjungi',
+
+    // Final - Complete Report - Below
+    'evidence' : 'Bukti Rapid Diagnostic Test dalam kurun waktu 10 hari terakhir dengan hasil non-reaktif :',
+    'symptoms-14day' : 'Gejala dalam 14 hari terakhir :',
+    'contact-with-covid' : 'Terpapar dengan seseorang yang terdiagnosis COVID-19 dalam 14 hari terakhir :',
+    'medical-support' : 'Bekerja di fasilitas kesehatan yang merawatpasien COVID-19 dalam 14 hari terakhir :',
+
 
     // Symptoms Form
     'form-antigen' : 'Apakah Anda memiliki hasil PCR atau antigen dalam kurun waktu <10 hari dengan hasil non-reaktif ?',
     'symptoms-14-day' : 'Apakah Anda memiliki gejala berikut dalam 14 hari?',
     'fever' : 'Demam atau riwayat demam',
-    'breath' : 'Sesak / kesulitan bernapas',
+    'breathingDifficulty' : 'Sesak / kesulitan bernapas',
     'cough' : 'Batuk atau riwayat batuk',
     'runnyNose' : 'Pilek',
-    'loseSmell' : 'Kehilangan daya penciuman',
-    'loseTaste' : 'Kehilangan daya penciuman',
+    'losingSenseSmell' : 'Kehilangan daya penciuman',
+    'losingSenseTaste' : 'Kehilangan daya penciuman',
     'bodyAches' : 'Nyeri otot',
-    'vomit' : 'Muntah atau diare',
+    'vomitDiarrhea' : 'Muntah atau diare',
 
-    'checkbox' : 'Dengan ini saya menyatakan bahwa informasi yang diberikan di atas adalah sesuai dengan yang Saya ketahui, lengkap dan benar.'
+    'checkbox' : 'Dengan ini saya menyatakan bahwa informasi yang diberikan di atas adalah sesuai dengan yang Saya ketahui, lengkap dan benar.',
+
+     // YES or NO
+     'yes': 'Ya',
+     'no' : 'Tidak'
   }
 }

@@ -1,0 +1,39 @@
+.select1 {
+  padding: 20px 485px;
+  color: #333333;
+  background-color:white;
+  border: 1px solid #dddddd;
+  cursor: pointer;
+  border-radius: 10px;
+  padding-left: 100px;
+  margin-top: 0.9rem;
+}
+
+.select2 {
+  padding: 20px 360px;
+  color: #333333;
+  background-color:white;
+  border: 1px solid #dddddd;
+  cursor: pointer;
+  border-radius: 10px;
+  padding-left: 100px;
+  margin-top: 0.9rem;
+}
+
+.select:focus,
+.select:hover {
+  outline: none;
+  border: 1px solid#bbbbbb;
+}
+
+.select option {
+  background: #ffffff;
+
+}
+
+.container {
+  justify-content: center;
+  justify-items: center;
+  align-items: center;
+  align-content: center;
+}

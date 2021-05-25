@@ -3,6 +3,7 @@ import { createSlice } from '@reduxjs/toolkit'
 export const formSlice = createSlice({
   name: 'form',
   initialState: {
+    userData: {},
     symptoms: {
       testResult: '',
       userId: '',
@@ -41,12 +42,16 @@ export const formSlice = createSlice({
         ...state.symptoms,
         userId : action.payload
       }
+    },
+    setUserData: (state,action) => {
+      state.userData = action.payload
     }
   }
 })
 
 // Action creators are generated for each case reducer function
 export const {
+  setUserData,
   setTestResult,
   setSymptoms,
   setUserId

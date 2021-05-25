@@ -1,15 +1,12 @@
 import axios from 'axios'
 import React, { useEffect } from 'react'
 import { FormattedMessage } from 'react-intl'
-import {
-  ButtonContainer,
-  Container, FormContainer, MainTitle, PersonalFormContainer, TitleContainer, TitleForm
-} from 'pages/personal/personalStyle'
 import { Form, Field } from 'react-final-form'
 import { useDispatch, useSelector } from 'react-redux'
 import { replace } from 'connected-react-router'
 import './form.css'
-import { setSymptoms, setTestResult, setUserId } from './slice'
+import { setSymptoms, setTestResult } from './slice'
+import Translate from 'i18n/translate'
 
 function TestForm() {
 
@@ -23,11 +20,11 @@ function TestForm() {
   }
 
   useEffect(() => {
-    console.log(form, "<< form use effect");
   }, [form])
 
   const handleSubmitSymptomsTest = async (values, dispatch) => {
     // values => semua isi symptoms "yes"/"no"
+    dispatch(setSymptoms(values))
     let temp = values
     temp = {
       ...temp,
@@ -40,7 +37,6 @@ function TestForm() {
       data: temp
     })
       .then(({ data }) => {
-        console.log(data, "<< data");
         dispatch(replace('/complete'))
       })
       .catch(err => {
@@ -55,7 +51,14 @@ function TestForm() {
           onSubmit={values => {
             handleSubmitTestResult(values, dispatch)
           }}
-          render={({ handleSubmit }) => (
+          validate={values => {
+            const errors = {};
+            if (!values.testResult) {
+              errors.testResult = "Required";
+            }
+            return errors;
+          }}
+          render={({ handleSubmit, values, submitting }) => (
             <form
               style={{
                 display: 'flex',
@@ -77,10 +80,10 @@ function TestForm() {
                 render={({ input, meta }) => (
                   <div className="radio-toolbar">
                     <input {...input} type="radio" id="buttonYes" name="testResult" value="yes" />
-                    <label for="buttonYes">Yes</label>
+                    <label for="buttonYes">{Translate('yes')}</label>
 
                     <input {...input} type="radio" id="buttonNo" name="testResult" value="no" />
-                    <label for="buttonNo">No</label>
+                    <label for="buttonNo">{Translate('no')}</label>
                   </div>
                 )}
               />
@@ -92,8 +95,9 @@ function TestForm() {
               >
                 <button
                   type="submit"
+                  disabled={submitting}
                 >
-                  Submit
+                  {Translate('submit')}
                 </button>
               </div>
             </form>
@@ -105,7 +109,35 @@ function TestForm() {
           onSubmit={values => {
             handleSubmitSymptomsTest(values, dispatch)
           }}
-          render={({ handleSubmit }) => (
+          validate={values => {
+            const errors = {};
+            if (!values.fever) {
+              errors.fever = "Required";
+            }
+            if (!values.breathingDifficulty) {
+              errors.breathingDifficulty = "Required";
+            }
+            if (!values.cough) {
+              errors.cough = "Required";
+            }
+            if (!values.runnyNose) {
+              errors.runnyNose = "Required";
+            }
+            if (!values.losingSenseSmell) {
+              errors.losingSenseSmell = "Required";
+            }
+            if (!values.losingSenseTaste) {
+              errors.losingSenseTaste = "Required";
+            }
+            if (!values.bodyAches) {
+              errors.bodyAches = "Required";
+            }
+            if (!values.vomitDiarrhea) {
+              errors.vomitDiarrhea = "Required";
+            }
+            return errors;
+          }}
+          render={({ handleSubmit, submitting }) => (
             <form
               style={{
                 display: 'flex',
@@ -116,150 +148,185 @@ function TestForm() {
               onSubmit={handleSubmit}
             >
               <div style={{
-                paddingBottom: '3rem'
+                padding: '2rem'
               }}>
                 <FormattedMessage
                   id="symptoms-14-day"
                 />
               </div>
               <br />
-              <FormattedMessage
-                id="fever"
-              />
+              <div style={{
+                paddingLeft: '2rem',
+              }}>
+                <FormattedMessage
+                  id="fever"
+                />
+              </div>
               <Field
                 name="fever"
                 render={({ input, meta }) => (
                   <div className="radio-toolbar">
                     <input {...input} type="radio" id="YesFever" name="fever" value="yes" />
-                    <label for="YesFever">Yes</label>
+                    <label for="YesFever">{Translate('yes')}</label>
 
                     <input {...input} type="radio" id="NoFever" name="fever" value="no" />
-                    <label for="NoFever">No</label>
+                    <label for="NoFever">{Translate('no')}</label>
                   </div>
                 )}
               />
-              <FormattedMessage
-                id="breath"
-              />
+              <div style={{
+                paddingLeft: '2rem'
+              }}>
+                <FormattedMessage
+                  id="breathingDifficulty"
+                />
+              </div>
               <Field
                 name="breathingDifficulty"
                 render={({ input, meta }) => (
                   <div className="radio-toolbar">
                     <input {...input} type="radio" id="YesBreath" name="breathingDifficulty" value="yes" />
-                    <label for="YesBreath">Yes</label>
+                    <label for="YesBreath">{Translate('yes')}</label>
 
                     <input {...input} type="radio" id="NoBreath" name="breathingDifficulty" value="no" />
-                    <label for="NoBreath">No</label>
+                    <label for="NoBreath">{Translate('no')}</label>
                   </div>
                 )}
               />
-              <FormattedMessage
-                id="cough"
-              />
+              <div style={{
+                paddingLeft: '2rem'
+              }}>
+                <FormattedMessage
+                  id="cough"
+                />
+              </div>
               <Field
                 name="cough"
                 render={({ input, meta }) => (
                   <div className="radio-toolbar">
                     <input {...input} type="radio" id="YesCough" name="cough" value="yes" />
-                    <label for="YesCough">Yes</label>
+                    <label for="YesCough">{Translate('yes')}</label>
 
                     <input {...input} type="radio" id="NoCough" name="cough" value="no" />
-                    <label for="NoCough">No</label>
+                    <label for="NoCough">{Translate('no')}</label>
                   </div>
                 )}
               />
-              <FormattedMessage
-                id="runnyNose"
-              />
+              <div style={{
+                paddingLeft: '2rem'
+              }}>
+                <FormattedMessage
+                  id="runnyNose"
+                />
+              </div>
               <Field
                 name="runnyNose"
                 render={({ input, meta }) => (
                   <div className="radio-toolbar">
                     <input {...input} type="radio" id="YesRunnyNose" name="runnyNose" value="yes" />
-                    <label for="YesRunnyNose">Yes</label>
+                    <label for="YesRunnyNose">{Translate('yes')}</label>
 
                     <input {...input} type="radio" id="NoRunnyNose" name="runnyNose" value="no" />
-                    <label for="NoRunnyNose">No</label>
+                    <label for="NoRunnyNose">{Translate('no')}</label>
                   </div>
                 )}
               />
-              <FormattedMessage
-                id="loseSmell"
-              />
+              <div style={{
+                paddingLeft: '2rem'
+              }}>
+                <FormattedMessage
+                  id="losingSenseSmell"
+                />
+              </div>
               <Field
                 name="losingSenseSmell"
                 render={({ input, meta }) => (
                   <div className="radio-toolbar">
                     <input {...input} type="radio" id="YesSmell" name="losingSenseSmell" value="yes" />
-                    <label for="YesSmell">Yes</label>
+                    <label for="YesSmell">{Translate('yes')}</label>
 
                     <input {...input} type="radio" id="NoSmell" name="losingSenseSmell" value="no" />
-                    <label for="NoSmell">No</label>
+                    <label for="NoSmell">{Translate('no')}</label>
                   </div>
                 )}
               />
-              <FormattedMessage
-                id="loseTaste"
-              />
+              <div style={{
+                paddingLeft: '2rem'
+              }}>
+                <FormattedMessage
+                  id="losingSenseTaste"
+                />
+              </div>
               <Field
                 name="losingSenseTaste"
                 render={({ input, meta }) => (
                   <div className="radio-toolbar">
                     <input {...input} type="radio" id="YesTaste" name="losingSenseTaste" value="yes" />
-                    <label for="YesTaste">Yes</label>
+                    <label for="YesTaste">{Translate('yes')}</label>
 
                     <input {...input} type="radio" id="NoTaste" name="losingSenseTaste" value="no" />
-                    <label for="NoTaste">No</label>
+                    <label for="NoTaste">{Translate('no')}</label>
                   </div>
                 )}
               />
-              <FormattedMessage
-                id="bodyAches"
-              />
+              <div style={{
+                paddingLeft: '2rem'
+              }}>
+                <FormattedMessage
+                  id="bodyAches"
+                />
+              </div>
               <Field
                 name="bodyAches"
                 render={({ input, meta }) => (
                   <div className="radio-toolbar">
                     <input {...input} type="radio" id="YesBodyAches" name="bodyAches" value="yes" />
-                    <label for="YesBodyAches">Yes</label>
+                    <label for="YesBodyAches">{Translate('yes')}</label>
 
                     <input {...input} type="radio" id="NoBodyAches" name="bodyAches" value="no" />
-                    <label for="NoBodyAches">No</label>
+                    <label for="NoBodyAches">{Translate('no')}</label>
                   </div>
                 )}
               />
-              <FormattedMessage
-                id="vomit"
-              />
+              <div style={{
+                paddingLeft: '2rem'
+              }}>
+                <FormattedMessage
+                  id="vomitDiarrhea"
+                />
+              </div>
               <Field
                 name="vomitDiarrhea"
                 render={({ input, meta }) => (
                   <div className="radio-toolbar">
                     <input {...input} type="radio" id="YesVomit" name="vomitDiarrhea" value="yes" />
-                    <label for="YesVomit">Yes</label>
+                    <label for="YesVomit">{Translate('yes')}</label>
 
                     <input {...input} type="radio" id="NoVomit" name="vomitDiarrhea" value="no" />
-                    <label for="NoVomit">No</label>
+                    <label for="NoVomit">{Translate('no')}</label>
                   </div>
                 )}
               />
 
-              <div>
+              <div style={{
+                paddingLeft: '2rem'
+              }}>
                 <input type="checkbox" id="checkbox" name="checkbox" />
-                <label for="vehicle1">
-                  <FormattedMessage
-                    id="checkbox"
-                  />
-                </label>
+                <FormattedMessage
+                  id="checkbox"
+                />
               </div>
 
               <div
                 style={{
-                  padding: '1rem'
+                  padding: '2rem'
                 }}
               >
-                <button>
-                  Submit
+                <button
+                  type="submit"
+                  disabled={submitting}
+                >
+                  {Translate('submit')}
                 </button>
               </div>
             </form>

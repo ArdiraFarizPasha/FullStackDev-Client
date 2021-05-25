@@ -1,6 +1,6 @@
 import axios from 'axios'
 import React from 'react'
-import { FormattedMessage } from 'react-intl'
+import { FormattedMessage, useIntl } from 'react-intl'
 import {
   ButtonContainer,
   Container, FormContainer, MainTitle, PersonalFormContainer, TitleContainer, TitleForm
@@ -10,8 +10,8 @@ import { useDispatch } from 'react-redux'
 import { TextInput, Dropdown } from './components/inputForm'
 import './personalStyle'
 import { replace } from 'connected-react-router'
-import { setUserId } from 'pages/form/slice'
-
+import { setUserId, setUserData } from 'pages/form/slice'
+import Translate from 'i18n/translate'
 
 
 
@@ -20,23 +20,25 @@ import { setUserId } from 'pages/form/slice'
 function PersonalForm() {
 
   const dispatch = useDispatch()
+  const intl = useIntl()
   const handleSubmit = (values, dispatch) => {
+    dispatch(setUserData(values))
     axios({
       method: 'post',
       url: 'http://localhost:5000/personal',
       data: values
     })
-    .then(({data}) => {
-      dispatch(setUserId(data.id))
-      dispatch(replace('/form'))
-    })
-    .catch(err => {
-      alert(err)
-    })
+      .then(({ data }) => {
+        dispatch(setUserId(data.id))
+        dispatch(replace('/form'))
+      })
+      .catch(err => {
+        alert(err)
+      })
   }
 
   const hospitalDropdown = [
-    { key: 'none', text: 'Select Hospital', value: '' },
+    { key: 'none', text: intl.formatMessage({ id: 'visited-hospital' }), value: '' },
     { key: 'kuta', text: 'BIMC Hospital Kuta', value: 'BIMC Hospital Kuta' },
     { key: 'nusa', text: 'BIMC Hospital Nusa Dua', value: 'BIMC Hospital Nusa Dua' },
     { key: 'smg', text: 'MRCCC Siloam Hospital Semanggi', value: 'MRCCC Siloam Hospital Semanggi' },
@@ -44,10 +46,13 @@ function PersonalForm() {
   ];
 
   const gender = [
-    { key: 'none', text: 'Select Gender', value: '' },
-    { key: 'male', text: 'Male', value: 'Male' },
-    { key: 'female', text: 'Female', value: 'Female' }
+    { key: 'none', text: intl.formatMessage({ id: 'gender' }), value: '' },
+    { key: 'male', text: intl.formatMessage({ id: 'male' }), value: 'Male' },
+    { key: 'female', text: intl.formatMessage({ id: 'female' }), value: 'Female' }
   ]
+
+  // const getValidator = isRequired =>
+  // isRequired ? value => (value ? undefined : "Required") : () => {};
 
   return (
     <Container>
@@ -55,14 +60,10 @@ function PersonalForm() {
         <FormContainer>
           <TitleContainer>
             <MainTitle>
-              <FormattedMessage
-                id="header"
-              />
+              {Translate("header")}
             </MainTitle>
             <TitleForm>
-              <FormattedMessage
-                id="personal-form-title"
-              />
+              {Translate("personal-form-title")}
             </TitleForm>
           </TitleContainer>
           <div>
@@ -70,86 +71,114 @@ function PersonalForm() {
               onSubmit={values => {
                 handleSubmit(values, dispatch)
               }}
-              render={({ handleSubmit }) => (
+              validate={values => {
+                const errors = {};
+                if (!values.fullName) {
+                  errors.fullName = "Required";
+                }
+                if (!values.phoneNumber) {
+                  errors.phoneNumber = "Required";
+                }
+                if (!values.visitedHospital) {
+                  errors.visitedHospital = "Required";
+                }
+                if (!values.gender) {
+                  errors.gender = "Required";
+                }
+                if (!values.dateOfBirth) {
+                  errors.dateOfBirth = "Required";
+                }
+                return errors;
+              }}
+              render={({ handleSubmit, submitting, values }) => (
                 <form
-                  style={{
-                    display: 'flex',
-                    flexWrap: 'wrap',
-                    flexDirection: 'column',
-                    justifyContent: 'center'
-                  }}
                   onSubmit={handleSubmit}
                 >
-                  {/* <div> */}
-                  <Field
-                    name="fullName"
-                    component={TextInput}
-                    placeholder="Full Name*"
-                    type="text"
-                    minLength='3'
-                  />
-                  {/* </div> */}
-                  {/* <div> */}
-                  <Field name="gender" options={gender} >
-                    {({ input, meta, options }) => {
-                      return (
-                        <Dropdown
-                          options={options}
-                          name={input.name}
-                          onChange={(value) => input.onChange(value)}
-                        />
-                      )
-                    }}
-                  </Field>
-                  {/* </div> */}
-                  {/* <div> */}
-                  <Field
-                    name="dateOfBirth"
-                    placeholder="Date of Birth (dd/mm/yyyy)*"
-                    component={TextInput}
-                    type="date"
-                    max={new Date()}
-                  />
-                  {/* </div>
-                  <div> */}
-                  <Field
-                    name="email"
-                    component={TextInput}
-                    placeholder="Email"
-                    type="text"
-                  />
-                  {/* </div>
-                  <div> */}
-                  <Field
-                    name="phoneNumber"
-                    component={TextInput}
-                    placeholder="Handphone number*"
-                    type="number"
-                  />
-                  {/* </div>
-                  <div> */}
-                  <Field name="visitedHospital" options={hospitalDropdown} >
-                    {({ input, meta, options }) => {
-                      return (
-                        <Dropdown
-                          options={options}
-                          name={input.name}
-                          onChange={(value) => input.onChange(value)}
-                        />
-                      )
-                    }}
-                  </Field>
-                  {/* </div> */}
                   <div
                     style={{
-                      padding: '1rem'
+                      display: 'grid',
+                      flexWrap: 'wrap',
+                      justifyContent: 'center',
+                      gridTemplateColumns: '700px 700px'
                     }}
                   >
-                    <button
-                      type="submit"
+                    <div>
+                      <Field
+                        name="fullName"
+                        component={TextInput}
+                        placeholder='fullname'
+                        type="text"
+                        minLength='3'
+                        allowNull='false'
+                        // validate={getValidator(values.fullName)}
+                        // key={values.fullName ? 1 : 0}
+                      />
+                    </div>
+                    <div>
+                      <Field name="gender" options={gender} allowNull='false' >
+                        {({ input, meta, options }) => {
+                          return (
+                            <Dropdown
+                              options={options}
+                              name={input.name}
+                              onChange={(value) => input.onChange(value)}
+                            />
+                          )
+                        }}
+                      </Field>
+                    </div>
+                    <div>
+                      <Field
+                        allowNull='false'
+                        name="dateOfBirth"
+                        placeholder='date-of-birth'
+                        component={TextInput}
+                        type="date"
+                        max={new Date()}
+                      />
+                    </div>
+                    <div>
+                      <Field
+                        name="email"
+                        component={TextInput}
+                        placeholder='email'
+                        type="text"
+                      />
+                    </div>
+                    <div>
+                      <Field
+                        allowNull='false'
+                        name="phoneNumber"
+                        component={TextInput}
+                        placeholder='handphone-number'
+                        type="number"
+                      />
+                    </div>
+                    <div>
+                      <Field name="visitedHospital" options={hospitalDropdown} allowNull='false' >
+                        {({ input, meta, options }) => {
+                          return (
+                            <Dropdown
+                              options={options}
+                              name={input.name}
+                              onChange={(value) => input.onChange(value)}
+                            />
+                          )
+                        }}
+                      </Field>
+                    </div>
+                    <div
+                      style={{
+                        padding: '1rem'
+                      }}
                     >
-                      Submit
+                      <button
+                        type="submit"
+                        disabled={submitting}
+                      >
+                        {Translate('submit')}
                       </button>
+                    </div>
                   </div>
                 </form>
               )}
