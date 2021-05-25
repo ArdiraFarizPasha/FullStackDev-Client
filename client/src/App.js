@@ -1,8 +1,6 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 
 import { I18nProvider, LOCALES } from 'i18n'
-import { FormattedMessage, IntlProvider } from 'react-intl'
-import Navbar from 'components/navbar';
 import routes from 'routes';
 import { ButtonText, InnerButton, NavbarContainer, SwitchLang } from 'pages/home/homeStyle';
 import { useDispatch } from 'react-redux';

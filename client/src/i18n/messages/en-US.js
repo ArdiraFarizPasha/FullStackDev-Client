@@ -56,7 +56,7 @@ export default {
     'fullname-final': 'Full Name',
     'gender-final': 'Gender',
     'date-of-birth-final': 'Date of Birth',
-    'visited-hospital': 'Siloam Unit Visited Today',
+    'visited-hospital-final': 'Siloam Unit Visited Today',
 
     // Final - Complete Report - Below
     'evidence': 'Evidence of a rapid diagnostic test within the last 10 days with a non-reactive result :',

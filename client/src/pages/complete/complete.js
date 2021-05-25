@@ -45,9 +45,7 @@ function CompletePage() {
                                 justifyContent: 'center'
                             }}
                         >
-                            <h1>
-                                {Translate('thank-you')}
-                            </h1>
+                            <h1>{Translate('thank-you')}</h1>
                         </div>
                         <div
                             style={{
@@ -55,9 +53,7 @@ function CompletePage() {
                                 justifyContent: 'center'
                             }}
                         >
-                            <p>
-                                {Translate('show-questionnaire')}
-                            </p>
+                            <p>{Translate('show-questionnaire')}</p>
                         </div>
                         <div
                             style={{
@@ -65,9 +61,7 @@ function CompletePage() {
                                 justifyContent: 'center'
                             }}
                         >
-                            <p>
-                                {Translate('test-result')}
-                            </p>
+                            <p>{Translate('test-result')}</p>
                         </div>
                     </div>
                     <div
@@ -96,11 +90,7 @@ function CompletePage() {
                                 }}
                             >
                                 <div>
-                                    <p>
-                                        <b>
-                                            {intl.formatMessage({ id: 'fullname-final' })}
-                                        </b>
-                                    </p>
+                                    <p><b>{intl.formatMessage({ id: 'fullname-final' })}</b></p>
                                 </div>
                                 <div>
                                     <p>{fullName}</p>
@@ -113,11 +103,7 @@ function CompletePage() {
                                 }}
                             >
                                 <div>
-                                    <p>
-                                        <b>
-                                            {intl.formatMessage({ id: 'gender-final' })}
-                                        </b>
-                                    </p>
+                                    <p><b>{intl.formatMessage({ id: 'gender-final' })}</b></p>
                                 </div>
                                 <div>
                                     <p>{gender}</p>
@@ -130,11 +116,7 @@ function CompletePage() {
                                 }}
                             >
                                 <div>
-                                    <p>
-                                        <b>
-                                            {intl.formatMessage({ id: 'date-of-birth-final' })}
-                                        </b>
-                                    </p>
+                                    <p><b>{intl.formatMessage({ id: 'date-of-birth-final' })}</b></p>
                                 </div>
                                 <div>
                                     <p>{dateOfBirth}</p>
@@ -147,11 +129,7 @@ function CompletePage() {
                                 }}
                             >
                                 <div>
-                                    <p>
-                                        <b>
-                                            {intl.formatMessage({ id: 'email' })}
-                                        </b>
-                                    </p>
+                                    <p><b>{intl.formatMessage({ id: 'email' })}</b></p>
                                 </div>
                                 <div>
                                     <p>{email} </p>
@@ -164,12 +142,7 @@ function CompletePage() {
                                 }}
                             >
                                 <div>
-                                    <p>
-                                        <b>
-                                            {intl.formatMessage({ id: 'visited-hospital' })}
-                                        </b>
-                                    </p>
-
+                                    <p><b>{intl.formatMessage({ id: 'visited-hospital-final' })}</b></p>
                                 </div>
                                 <div>
                                     <p>{visitedHospital}</p>

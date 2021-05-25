@@ -1,7 +1,5 @@
-import axios from 'axios'
-import React, { useState } from 'react'
+import React from 'react'
 import HomepageLogo from 'assets/home-cough-logo.png'
-import { FormattedMessage } from 'react-intl'
 import {
   Container,
   HomeContentContainer,

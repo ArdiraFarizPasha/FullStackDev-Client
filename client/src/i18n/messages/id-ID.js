@@ -51,7 +51,7 @@ export default {
     'fullname-final' : 'Nama Lengkap',
     'gender-final' : 'Jenis Kelamin',
     'date-of-birth-final' : 'Tanggal Lahir',
-    'visited-hospital' : 'Unit Siloam yang Dikunjungi',
+    'visited-hospital-final' : 'Unit Siloam yang Dikunjungi',
 
     // Final - Complete Report - Below
     'evidence' : 'Bukti Rapid Diagnostic Test dalam kurun waktu 10 hari terakhir dengan hasil non-reaktif :',

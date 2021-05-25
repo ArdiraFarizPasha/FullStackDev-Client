@@ -1,6 +1,5 @@
 import React from 'react'
 import 'pages/personal/personal.css'
-import Translate from 'i18n/translate'
 import { useIntl } from 'react-intl'
 import './inputForm.css'
 

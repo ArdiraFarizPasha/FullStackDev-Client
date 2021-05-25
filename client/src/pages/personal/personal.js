@@ -1,8 +1,7 @@
 import axios from 'axios'
 import React from 'react'
-import { FormattedMessage, useIntl } from 'react-intl'
+import { useIntl } from 'react-intl'
 import {
-  ButtonContainer,
   Container, FormContainer, MainTitle, PersonalFormContainer, TitleContainer, TitleForm
 } from 'pages/personal/personalStyle'
 import { Form, Field } from 'react-final-form'
